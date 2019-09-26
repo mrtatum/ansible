@@ -1,0 +1,22 @@
+---
+# tasks file for common
+- name: Copy Repository server certificate to clients
+  copy:
+    src: reposerv.localdomain.crt
+    dest: /etc/pki/tls/certs/reposerv.localdomain.crt
+    mode: '0640'
+- name: Add Local Repository
+  yum_repository:
+    name: LocalRepo
+    description: Local Repository for Redhat 7
+    file: localrepo
+    baseurl: https://reposerv.localdomain/repo/cdn/
+    gpgcheck: yes
+    sslcacert: /etc/pki/tls/certs/reposerv.localdomain.crt
+    sslverify: yes
+    enabled: yes
+- name: Copy NMON package to clients
+  copy:
+    src: nmon_x86_rhel75
+    dest: /usr/bin/nmon
+    mode: '0755' 
