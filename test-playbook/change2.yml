@@ -1,0 +1,17 @@
+---
+- hosts: testrepo
+  tasks:
+  - name: Step1-Change hostname 
+    replace:
+        path: /etc/hostname
+        regexp: 'testrepo'
+        replace: 'localrepo'
+        backup: yes
+  - name: Logging Step 1
+    shell: echo "Step1 - Change hostname completed"  >> /tmp/change2.log
+  - name: Restart hostnamed service
+    systemd:
+        state: restarted
+        name: systemd-hostnamed
+  - name: Logging Step 2
+    shell: echo "Step2 - Restart hostnamed service" >> /tmp/change2.log

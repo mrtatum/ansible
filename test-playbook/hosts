@@ -1,0 +1,3 @@
+[group1]
+testrepo ansible_host=10.4.160.43 
+localrepo ansible_host=10.4.160.43

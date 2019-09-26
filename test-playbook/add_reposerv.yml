@@ -1,0 +1,17 @@
+---
+- hosts: localrepo
+  tasks:
+  - name: Copy Repository server certificate to client
+    copy: 
+      src: ./file/reposerv.localdomain.crt
+      dest: /etc/pki/tls/certs/reposerv.localdomain.crt
+  - name: Add Local Repository
+    yum_repository:
+      name: LocalRepo 
+      description: Local Repository for Redhat 7
+      file: localrepo
+      baseurl: https://reposerv.localdomain/repo/cdn/
+      gpgcheck: yes
+      sslcacert: /etc/pki/tls/certs/reposerv.localdomain.crt
+      sslverify: yes
+      enabled: yes 
