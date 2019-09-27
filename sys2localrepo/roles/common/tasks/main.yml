@@ -5,6 +5,8 @@
     src: reposerv.localdomain.crt
     dest: /etc/pki/tls/certs/reposerv.localdomain.crt
     mode: '0640'
+- name: Add host file for repository server
+  shell: echo "10.4.160.41    reposerv.localdomain" >> /etc/hosts
 - name: Add Local Repository
   yum_repository:
     name: LocalRepo
